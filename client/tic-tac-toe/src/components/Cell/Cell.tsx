@@ -1,6 +1,6 @@
 import styles from './Cell.module.scss';
 import {Tag} from "../../enums";
-import {FC, useCallback, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 
 export interface CellProps {
     tag: Tag | null,
@@ -11,6 +11,8 @@ export interface CellProps {
 
 const Cell: FC<CellProps> = ({tag, cellTagged, clientTag, canPlay}) => {
     const [state, setState] = useState<Tag | null>(tag);
+
+    useEffect(() => setState(tag), [tag]);
 
     const clickable = !state && canPlay;
 

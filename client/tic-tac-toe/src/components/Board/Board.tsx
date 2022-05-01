@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import styles from './Board.module.scss';
 import Cell from "../Cell";
 import {Tag} from "../../enums";
@@ -11,6 +11,10 @@ export interface IBoardProps  {
 }
 
 const Board: FC<IBoardProps> = ({cells, clientTag, canPlay, tagCell}) => {
+    const [canPlayState, setCanPlay] = useState<boolean>(canPlay);
+
+    useEffect(() => setCanPlay(canPlay), [canPlay]);
+
     return (
       <div className={styles.board}>
           {cells.map((row, rowIndex) =>
@@ -19,10 +23,13 @@ const Board: FC<IBoardProps> = ({cells, clientTag, canPlay, tagCell}) => {
                     key={`${rowIndex}${columnIndex}`}
                     className={styles.board__cell}>
                     <Cell
-                        canPlay={canPlay}
+                        canPlay={canPlayState}
                         clientTag={clientTag}
                         tag={cell}
-                        cellTagged={(tag: Tag) => tagCell(rowIndex, columnIndex, tag)}
+                        cellTagged={(tag: Tag) => {
+                            setCanPlay(false);
+                            tagCell(rowIndex, columnIndex, tag);
+                        }}
                     />
                 </div>
             ))}
