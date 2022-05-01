@@ -117,7 +117,7 @@ namespace TicTacToe.Api.Controllers
         {
             await _commandDispatcher.SendAsync(new DeleteGame(id));
 
-            return new NoContentResult();
+            return new OkObjectResult(id);
         }
     }
 }

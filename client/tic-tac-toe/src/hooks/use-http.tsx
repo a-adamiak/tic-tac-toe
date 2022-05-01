@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {IError} from "../interfaces";
+import {useState} from "react";
+import {IApiError} from "../models";
 
 export interface IRequestConfig {
-    url: string;
-    method: string;
+    url?: string;
+    method?: string;
     body?: unknown;
 }
 
-export function useHttp<T> (requestConfig: IRequestConfig): [isLoading: boolean, error: IError | null, data: T | null, sendRequest: () => void] {
+export function useHttp<T> (requestConfig: IRequestConfig): [isLoading: boolean, error: IApiError | null, data: T | null, sendRequest: (overwriteConfig?: IRequestConfig) => void] {
     const genericError = 'UndefinedError';
 
     const getErrorMessage = (error: unknown): string => {
@@ -18,19 +18,23 @@ export function useHttp<T> (requestConfig: IRequestConfig): [isLoading: boolean,
     }
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<IError | null>(null);
+    const [error, setError] = useState<IApiError | null>(null);
     const [data, setData] = useState<T | null>(null);
 
-    const sendRequest = async () => {
+    const sendRequest = async (overwriteConfig?: IRequestConfig) => {
         setIsLoading(true);
         setError(null);
 
         try {
             const response = await fetch(
-                requestConfig.url,
+                overwriteConfig?.url ?? requestConfig.url ?? '',
                 {
                     method: requestConfig.method,
-                    body: requestConfig.body ? JSON.stringify(requestConfig.body) : null
+                    body: (overwriteConfig?.body ?? requestConfig.body) ? JSON.stringify(requestConfig.body) : null,
+                    headers: new Headers({
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                    })
                 }
             );
 

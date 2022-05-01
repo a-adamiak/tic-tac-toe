@@ -1,51 +1,29 @@
-import React, {createContext, ReactElement, Reducer, useCallback, useEffect, useReducer} from "react";
-import {IGame} from "../../interfaces";
-import {GamesAction, GamesActionKind} from "./action";
+import React, {createContext, ReactElement} from "react";
 import {GameStatus} from "../../enums";
-import {contextInitialState, IGamesContextState, IGamesState, reducerInitialState} from "./state";
-import {useHttp} from "../../hooks";
+import {IGameMetadata, useGameManager} from "../../hooks";
+
+export const contextInitialState = {
+    games: [] as IGameMetadata[],
+    updateGameState: (gameId: string, gameState: GameStatus) => {},
+    addGame: () => {},
+    deleteGame: (gameId: string) => {}
+};
+
+export type GamesContextState = typeof contextInitialState;
 
 
-interface IGamesContextProps {
+interface GamesContextProps {
     children: ReactElement | ReactElement[]
 }
 
-const GamesContext = createContext<IGamesContextState>(contextInitialState);
+const GamesContext = createContext<GamesContextState>(contextInitialState);
 
-const gamesReducer = (state: IGamesState, action: GamesAction) => {
-    switch (action.type){
-        case GamesActionKind.SET:
-            return {games: action.payload}
-        case GamesActionKind.UPDATE_STATUS:
-            return {
-                games: state.games.map((game: IGame) =>
-                    game.id === action.payload.id ?
-                        {...game, status: action.payload.status} : game)
-            }
-    }
-    return {games: []}
-}
 
-export const GamesContextProvider: React.FC<IGamesContextProps> = ({children}) => {
-    const apiUrl: string = `${process.env.REACT_APP_API_URL}/api/v1/games`;
-
-    const [gamesState, dispatchGamesAction] = useReducer<Reducer<IGamesState, GamesAction>>(gamesReducer, reducerInitialState);
-    const [isLoading, error, data, sendRequest] = useHttp<IGame[]>({method: 'GET', url: apiUrl})
-
-    useEffect(() => {
-        sendRequest();
-    }, []);
-
-    useEffect(() => {
-        dispatchGamesAction({type: GamesActionKind.SET, payload: data});
-    }, [data])
-
-    const updateGameState = useCallback((id: string, status: GameStatus) =>
-            dispatchGamesAction({type: GamesActionKind.UPDATE_STATUS, payload: {id, status}})
-        ,  [])
+export const GamesContextProvider: React.FC<GamesContextProps> = ({children}) => {
+    const [games, updateGameState, addGame, deleteGame] = useGameManager();
 
     return (
-    <GamesContext.Provider value={{games: gamesState.games ?? [], updateGameState}}>
+    <GamesContext.Provider value={{games: games, updateGameState, addGame, deleteGame}}>
         {children}
     </GamesContext.Provider>
     );

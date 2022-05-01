@@ -10,15 +10,13 @@ const GamesManager = () => {
     return (
         <GamesContextProvider>
             <div className={styles.manager}>
-                <nav className={styles.manager__nav}>
+                <div className={styles.manager__nav}>
                     <GamesList/>
-                </nav>
-                <div>
-                    <Routes>
-                        <Route path='/:gameId' element={<Game />} />
-                        <Route path='/' element={<Home />} />
-                    </Routes>
                 </div>
+                <Routes>
+                    <Route path='/:gameId' element={<Game />} />
+                    <Route path='/' element={<Home />} />
+                </Routes>
             </div>
         </GamesContextProvider>
     )

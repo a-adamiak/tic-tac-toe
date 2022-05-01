@@ -1,38 +1,20 @@
-@import "/src/assets/styles/colors";
-
 $item-padding: 0.2rem;
 
+.header {
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px var(--divider) solid;
+  justify-content: space-evenly;
+}
 
 .list {
-  height: 100%;
+  height: calc(100% - 35px);
   overflow-y: auto;
-  display: flex;
+  flex-direction: column;
   flex-direction: column;
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 100%;
   overflow-y: auto;
-
-  &__link {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    border-radius: 5px;
-    padding: $item-padding;
-
-    display: block;
-    background-color: $primary-light;
-    color: $primary;
-    text-decoration: none;
-    font-size: 0.8rem;
-
-    &:hover {
-      background-color: $primary;
-      color: $secondary-text;
-    }
-
-    &--active {
-      color: $accent;
-      text-decoration: underline;
-    }
-  }
 }

@@ -6,8 +6,8 @@
     /// <param name="Id">Id of the game</param>
     /// <param name="Cells">Game board with the marked cells</param>
     /// <param name="Status">Current status of the game</param>
-    /// <param name="ClientMark">Initial client mark</param>
-    public record GameDto(Guid Id, TagDto?[][] Cells, GameStatusDto Status, TagDto ClientMark)
+    /// <param name="ClientTag">Initial client mark</param>
+    public record GameDto(Guid Id, TagDto?[][] Cells, GameStatusDto Status, TagDto ClientTag)
     {
     }
 
