@@ -1,0 +1,25 @@
+.layout {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+
+  &__container {
+    background-color: var(--secondary-background);
+    border: var(--divider);
+    flex-basis: 70%;
+    min-width: 600px;
+    min-height: 600px;
+    height: 60%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__main {
+    display: flex;
+    height: calc(100% - 3rem);
+  }
+}

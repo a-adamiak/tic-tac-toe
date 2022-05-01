@@ -1,0 +1,20 @@
+$item-padding: 0.2rem;
+
+.header {
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px var(--divider) solid;
+  justify-content: space-evenly;
+}
+
+.list {
+  height: calc(100% - 35px);
+  overflow-y: auto;
+  flex-direction: column;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-y: auto;
+}

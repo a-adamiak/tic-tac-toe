@@ -102,11 +102,11 @@ namespace TicTacToe.Tests.Domain
         }
 
         [Theory, AutoData]
-        internal void MarkCell_WhenCellAlreadyMarked_ThrowsCellAlreadyMarked(Tag newTag, Guid id, Tag initialTag)
+        internal void MarkCell_WhenCellAlreadyMarked_ThrowsCellAlreadyMarked(Tag newTag, Guid id, Tag initialTag, DateTime date)
         {
             //Arrange
 
-            var game = new Game(id, GameStatus.InProgress, initialTag)
+            var game = new Game(id, GameStatus.InProgress, initialTag, date)
             {
                 Cells = new Tag?[3, 3]
                 {
@@ -127,11 +127,11 @@ namespace TicTacToe.Tests.Domain
         }
 
         [Theory, AutoData]
-        internal void MarkCell_SameTagRepeated_InvalidTurn(Tag newTag, Guid id, Tag initialTag)
+        internal void MarkCell_SameTagRepeated_InvalidTurn(Tag newTag, Guid id, Tag initialTag, DateTime date)
         {
             //Arrange
 
-            var game = new Game(id, GameStatus.InProgress, initialTag)
+            var game = new Game(id, GameStatus.InProgress, initialTag, date)
             {
                 Cells = new Tag?[3, 3]
             };
@@ -149,11 +149,11 @@ namespace TicTacToe.Tests.Domain
         }
 
         [Theory, AutoData]
-        internal void MarkCell_Should_KeepOpenGame(Tag newTag, Guid id, Tag initialTag)
+        internal void MarkCell_Should_KeepOpenGame(Tag newTag, Guid id, Tag initialTag, DateTime date)
         {
             //Arrange
 
-            var game = new Game(id, GameStatus.InProgress, initialTag)
+            var game = new Game(id, GameStatus.InProgress, initialTag, date)
             {
                 Cells = new Tag?[3, 3]
             };
@@ -169,11 +169,11 @@ namespace TicTacToe.Tests.Domain
         }
 
         [Theory, AutoData]
-        internal void MarkCell_WhenXWon_ShouldFinishGame(Guid id, Tag initialTag)
+        internal void MarkCell_WhenXWon_ShouldFinishGame(Guid id, Tag initialTag, DateTime date)
         {
             //Arrange
 
-            var game = new Game(id, GameStatus.InProgress, initialTag)
+            var game = new Game(id, GameStatus.InProgress, initialTag, date)
             {
                 Cells = new Tag?[3, 3]
                 {
@@ -194,11 +194,11 @@ namespace TicTacToe.Tests.Domain
         }
 
         [Theory, AutoData]
-        internal void MarkCell_WhenOWon_ShouldFinishGame(Guid id, Tag initialTag)
+        internal void MarkCell_WhenOWon_ShouldFinishGame(Guid id, Tag initialTag, DateTime date)
         {
             //Arrange
 
-            var game = new Game(id, GameStatus.InProgress, initialTag)
+            var game = new Game(id, GameStatus.InProgress, initialTag, date)
             {
                 Cells = new Tag?[3, 3]
                 {
@@ -219,11 +219,11 @@ namespace TicTacToe.Tests.Domain
         }
 
         [Theory, AutoData]
-        internal void MarkCell_WhenNoCells_ShouldDrawGame(Guid id, Tag initialTag)
+        internal void MarkCell_WhenNoCells_ShouldDrawGame(Guid id, Tag initialTag, DateTime date)
         {
             //Arrange
 
-            var game = new Game(id, GameStatus.InProgress, initialTag)
+            var game = new Game(id, GameStatus.InProgress, initialTag, date)
             {
                 Cells = new Tag?[3, 3]
                 {

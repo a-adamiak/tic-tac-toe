@@ -39,7 +39,8 @@ internal sealed class BotGameUpdatedHandler: IDomainEventHandler<GameUpdated>
     private Task HandleBotMove(Game game)
     {
         var botTag = game.InitialTag == Tag.O ? Tag.X : Tag.O;
-        var tryWin = DateTime.Now.Millisecond % 2 == 0;
+        //var tryWin = DateTime.Now.Millisecond % 2 == 0;
+        var tryWin = true;
 
         var nextBotMove = _botEngine.GetNextMove(game.Cells, botTag, tryWin);
 

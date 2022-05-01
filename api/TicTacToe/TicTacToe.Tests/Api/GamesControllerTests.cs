@@ -65,7 +65,7 @@ namespace TicTacToe.Tests.Api
 
             // Act
 
-            var result = await controller.GetGame(id);
+            var result = await controller.GetGame(id.ToString());
 
             result.Should().BeOfType<OkObjectResult>();
         }
@@ -95,7 +95,7 @@ namespace TicTacToe.Tests.Api
 
             var result = await controller.DeleteGame(id);
 
-            result.Should().BeOfType<NoContentResult>();
+            result.Should().BeOfType<OkObjectResult>();
         }
 
         [Theory, AutoMoqData(typeof(ControllerCustomization))]

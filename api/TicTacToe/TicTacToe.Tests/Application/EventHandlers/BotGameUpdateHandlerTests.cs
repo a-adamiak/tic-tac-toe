@@ -131,6 +131,7 @@ public class BotGameUpdateHandlerTests
     internal async Task HandleAsync_When_HandleNextMove_And_EngineGotMove_Should_UpdateGame(
         Guid gameId,
         Tag initialTag,
+        DateTime date,
         GameUpdated gameUpdated,
         [Frozen] Mock<IGameRepository> gameRepository,
         [Frozen] Mock<IDomainEventDispatcher> domainEventDispatcher,
@@ -139,7 +140,7 @@ public class BotGameUpdateHandlerTests
     {
         // Arrange
 
-        var inProgressGame = new Game(gameId, GameStatus.InProgress, initialTag)
+        var inProgressGame = new Game(gameId, GameStatus.InProgress, initialTag, date)
         {
             Cells = new Tag?[3, 3]
         };

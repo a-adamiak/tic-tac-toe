@@ -9,17 +9,18 @@ public sealed class Game
 {
     private Tag? _lastTag;
     private object _lockObj = new ();
-    
-    public Game(Guid id, GameStatus status, Tag initialTag)
+
+    public Game(Guid id, GameStatus status, Tag initialTag, DateTime creationDate)
     {
         Id = id;
         InitialTag = initialTag;
         Status = status;
         Cells = new Tag?[CellSizes.RowsLength, CellSizes.ColumnsLength];
+        CreationDate = creationDate;
     }
 
     public Guid Id { get; }
-
+    public DateTime CreationDate { get; }
 
     // In ideal work it should be immutable but to simplify I don't do this
     public Tag?[,] Cells { get; init; }
@@ -30,7 +31,7 @@ public sealed class Game
     public void Delete()
     {
         if (Status == GameStatus.Deleted)
-            throw new GameNotExist(Id);
+            throw new GameNotExist(Id.ToString());
 
         Status = GameStatus.Deleted;
     }
@@ -63,7 +64,7 @@ public sealed class Game
         }
     }
 
-    public static Game Create(Guid id, Tag firstTag) => new(id, GameStatus.InProgress, firstTag);
+    public static Game Create(Guid id, Tag firstTag) => new(id, GameStatus.InProgress, firstTag, DateTime.UtcNow);
 
     // It is a place for possible optimization 
     private GameStatus GetNewState(Tag lastMove) =>

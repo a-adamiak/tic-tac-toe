@@ -1,0 +1,10 @@
+$header-height: 3rem;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary);
+  height: $header-height;
+  color: var(--secondary-text);
+}

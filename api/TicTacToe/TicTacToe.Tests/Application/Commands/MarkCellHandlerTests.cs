@@ -29,6 +29,7 @@ public class MarkCellHandlerTests
 
     [Theory, AutoMoqData]
     internal async Task HandleAsync_Should_UpdateGame(
+        DateTime date,
         Guid gameId, 
         Tag tag,
         [Frozen] Mock<IGameRepository> gameRepository,
@@ -39,7 +40,7 @@ public class MarkCellHandlerTests
 
         var markCell = new MarkCell(gameId, tag, CellSizes.RowsLength - 1, CellSizes.ColumnsLength - 1);
 
-        var inProgressGame = new Game(gameId, GameStatus.InProgress, tag)
+        var inProgressGame = new Game(gameId, GameStatus.InProgress, tag, date)
         {
             Cells = new Tag?[3, 3]
         };
@@ -63,6 +64,7 @@ public class MarkCellHandlerTests
     internal async Task HandleAsync_When_Won_Should_FinishGame(
         Guid gameId,
         Tag tag,
+        DateTime date,
         [Frozen] Mock<IGameRepository> gameRepository,
         [Frozen] Mock<IDomainEventDispatcher> domainEventDispatcher,
         MarkCellHandler handler)
@@ -71,7 +73,7 @@ public class MarkCellHandlerTests
 
         var markCell = new MarkCell(gameId, tag, CellSizes.RowsLength - 1, CellSizes.ColumnsLength - 1);
 
-        var inProgressGame = new Game(gameId, GameStatus.InProgress, tag)
+        var inProgressGame = new Game(gameId, GameStatus.InProgress, tag, date)
         {
             Cells = new Tag?[3, 3]
             {

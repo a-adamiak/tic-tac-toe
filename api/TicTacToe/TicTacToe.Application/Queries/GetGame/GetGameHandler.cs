@@ -10,8 +10,8 @@ public sealed class GetGameHandler: IQueryHandler<GetGame, Game>
 
     public GetGameHandler(IGameRepository gameRepository) => _gameRepository = gameRepository;
 
-    public Task<Game> HandleAsync(GetGame query, CancellationToken cancellationToken = default)
+    public async Task<Game> HandleAsync(GetGame query, CancellationToken cancellationToken = default)
     {
-        return _gameRepository.GetAsync(query.Id, cancellationToken);
+        return await _gameRepository.GetAsync(query.Id, cancellationToken);
     }
 }
