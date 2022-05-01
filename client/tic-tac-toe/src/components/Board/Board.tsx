@@ -1,14 +1,33 @@
-import {IGame} from "../../models";
 import {FC} from "react";
+import styles from './Board.module.scss';
+import Cell from "../Cell";
 import {Tag} from "../../enums";
 
-export interface IBoardProps extends IGame {
+export interface IBoardProps  {
     canPlay: boolean;
-    tagCell: (row: number, column: number) => void
+    tagCell: (row: number, column: number, tag: Tag) => void
+    cells: (Tag | null)[][];
+    clientTag: Tag;
 }
 
-const Board: FC<IBoardProps> = ({id, cells, status, clientTag, canPlay}) => {
-    return <p>Board works</p>
+const Board: FC<IBoardProps> = ({cells, clientTag, canPlay, tagCell}) => {
+    return (
+      <div className={styles.board}>
+          {cells.map((row, rowIndex) =>
+            row.map((cell, columnIndex) =>
+                <div
+                    key={`${rowIndex}${columnIndex}`}
+                    className={styles.board__cell}>
+                    <Cell
+                        canPlay={canPlay}
+                        clientTag={clientTag}
+                        tag={cell}
+                        cellTagged={(tag: Tag) => tagCell(rowIndex, columnIndex, tag)}
+                    />
+                </div>
+            ))}
+      </div>
+    );
 }
 
 export default Board;

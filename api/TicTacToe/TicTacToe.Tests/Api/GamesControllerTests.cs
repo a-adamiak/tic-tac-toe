@@ -65,7 +65,7 @@ namespace TicTacToe.Tests.Api
 
             // Act
 
-            var result = await controller.GetGame(id);
+            var result = await controller.GetGame(id.ToString());
 
             result.Should().BeOfType<OkObjectResult>();
         }

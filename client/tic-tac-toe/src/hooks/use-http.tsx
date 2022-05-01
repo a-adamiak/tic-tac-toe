@@ -40,7 +40,10 @@ export function useHttp<T> (requestConfig: IRequestConfig): [isLoading: boolean,
 
             if(!response.ok) {
                 const data = await response.json();
-                setError(data)
+                setError({
+                    ...data,
+                    status: response.status
+                })
             }
             else {
                 const data = await response.json();
@@ -48,7 +51,7 @@ export function useHttp<T> (requestConfig: IRequestConfig): [isLoading: boolean,
             }
         }
         catch (err: any) {
-            setError({code: genericError, message: getErrorMessage(err)})
+            setError({code: genericError, message: getErrorMessage(err), status: 500})
         }
 
         setIsLoading(false);

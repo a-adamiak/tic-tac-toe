@@ -5,6 +5,8 @@ import {GameStatus, Tag} from "../../enums";
 import {useHttp} from "../use-http";
 import {GameAction, GameActionKind} from "./actions";
 import {gameReducer} from "./reducer";
+import {notifyOnError, notifyOnStatusChanged} from "../../helpers";
+import {useNavigate} from "react-router-dom";
 
 const emptyBoard: (Tag | null)[][] = [[null, null, null], [null, null, null], [null, null, null]];
 
@@ -17,6 +19,8 @@ export type gamePlayerResponse = [
 
 export const useGamePlayer = (gameId: string) : gamePlayerResponse => {
     const apiUrl: string = `${process.env.REACT_APP_API_URL}/api/v1/games/${gameId}`;
+
+    const navigate = useNavigate();
 
     const initialGame = {
         status: GameStatus.Loading,
@@ -39,27 +43,31 @@ export const useGamePlayer = (gameId: string) : gamePlayerResponse => {
     }, [gameResponse]);
 
     useEffect(() => {
+        if(getError)
+            getError.status === 404 ? navigate('../') : notifyOnError(getError);
+    }, [getError])
+
+    useEffect(() => {
         dispatchGameAction({type: GameActionKind.SET, payload: tagResponse});
+
+        notifyOnStatusChanged(tagResponse?.status!);
     }, [tagResponse]);
 
     useEffect(() => {
-        // to simplify single effect
-        if(getError)
-            alert(getError.message)
-        if(tagError)
-            alert(tagError.message)
-    }, [getError, tagError])
-
+        if(tagError){
+            notifyOnError(tagError)
+            getGameRequest();
+        }
+    }, [tagError, gameId])
 
     const canPlay: boolean = useMemo(() =>
-        tagIsLoading === false && getIsLoading === false && !!getError && !!tagError,
-        [tagIsLoading, getIsLoading, tagError, getError]);
+        tagIsLoading === false && getIsLoading === false && !getError && game?.status === GameStatus.InProgress,
+        [tagIsLoading, getIsLoading, getError, game]);
 
     const tagCell = useCallback((row: number, column: number) => {
         dispatchGameAction({type: GameActionKind.MARK_CELL, payload: {row, column}});
-
-        tagCellRequest({url: `/cells/${row}/${column}`});
-    }, [])
+        tagCellRequest({url: apiUrl + `/cells/${row}/${column}`});
+    }, [apiUrl])
 
     return [
         canPlay,

@@ -9,6 +9,7 @@ using TicTacToe.Application.Queries.GetAllGames;
 using TicTacToe.Application.Queries.GetGame;
 using TicTacToe.Application.Shared;
 using TicTacToe.Domain.Enums;
+using TicTacToe.Domain.Exceptions;
 
 namespace TicTacToe.Api.Controllers
 {
@@ -57,9 +58,14 @@ namespace TicTacToe.Api.Controllers
         [ProducesResponseType(typeof(GameDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDto), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ErrorDto), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetGame(Guid id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetGame(string id, CancellationToken cancellationToken = default)
         {
-            var game = await _queryDispatcher.QueryAsync(new GetGame(id), cancellationToken);
+            if(!Guid.TryParse(id, out var result))
+            {
+                throw new GameNotExist(id);
+            };
+
+            var game = await _queryDispatcher.QueryAsync(new GetGame(result), cancellationToken);
 
             return new OkObjectResult(game.ToDto());
         }

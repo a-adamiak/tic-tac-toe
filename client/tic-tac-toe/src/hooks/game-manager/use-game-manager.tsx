@@ -6,6 +6,8 @@ import {GameStatus} from "../../enums";
 import {GamesAction, GamesActionKind} from "./actions";
 import {GamesState, reducerInitialState} from "./state";
 import {gamesReducer} from "./reducer";
+import {notifyOnError} from "../../helpers";
+import {useNavigate} from "react-router-dom";
 
 export type gameManagerResponse = [
     games: IGameMetadata[],
@@ -18,6 +20,7 @@ export type gameManagerResponse = [
 export const useGameManager = () : gameManagerResponse => {
     const apiUrl: string = `${process.env.REACT_APP_API_URL}/api/v1/games`;
 
+    const navigate = useNavigate();
     const [gamesState, dispatchGamesAction] = useReducer<Reducer<GamesState, GamesAction>>(gamesReducer, reducerInitialState);
     // to simplify I don't use the loading state
     const [getIsLoading, getError, allGames, getAllRequest] = useHttp<IGame[]>({method: 'GET', url: apiUrl})
@@ -35,29 +38,30 @@ export const useGameManager = () : gameManagerResponse => {
 
     useEffect(() => {
         if(createdGameId){
-            alert(`Game ${createdGameId} created. Click first game in the list and have fun!`)
             dispatchGamesAction({type: GamesActionKind.ADD_GAME, payload: {gameId: createdGameId}});
+            navigate(createdGameId);
         }
         }, [createdGameId])
 
     useEffect(() => {
         if(deletedGameId){
-            alert(`Game ${createdGameId} successfully deleted.`)
             dispatchGamesAction({type: GamesActionKind.DELETE_GAME, payload: {gameId: deletedGameId}});
         }
 
     }, [deletedGameId])
 
     useEffect(() => {
-        // to simplify single effect
         if(getError)
-            alert(getError.message)
+            notifyOnError(getError);
+    }, [getError])
+    useEffect(() => {
         if(postError)
-            alert(postError)
+            notifyOnError(postError);
+    }, [postError])
+    useEffect(() => {
         if(deleteError)
-            alert(deleteError)
-
-    }, [getError, postError, deleteError])
+            notifyOnError(deleteError);
+    }, [deleteError])
 
     const updateGameState = useCallback((gameId: string, status: GameStatus) =>
         dispatchGamesAction({type: GamesActionKind.UPDATE_STATUS, payload: {gameId, status}}),  [])

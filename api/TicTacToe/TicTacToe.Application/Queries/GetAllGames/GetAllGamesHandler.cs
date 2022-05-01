@@ -11,8 +11,8 @@ public sealed class GetAllGamesHandler: IQueryHandler<GetAllGames, IEnumerable<G
 
     public GetAllGamesHandler(IGameRepository gameRepository) => _gameRepository = gameRepository;
 
-    public Task<IEnumerable<Game>> HandleAsync(GetAllGames query, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Game>> HandleAsync(GetAllGames query, CancellationToken cancellationToken = default)
     {
-        return _gameRepository.GetAllAsync(cancellationToken);
+        return await _gameRepository.GetAllAsync(cancellationToken);
     }
 }

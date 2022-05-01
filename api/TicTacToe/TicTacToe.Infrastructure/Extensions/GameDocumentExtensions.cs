@@ -6,7 +6,7 @@ namespace TicTacToe.Infrastructure.Extensions
     internal static class GameDocumentExtensions
     {
         public static Game ToEntity(this GameDocument document) =>
-            new(document.Id, document.Status, document.InitialTag)
+            new(document.Id, document.Status, document.InitialTag, document.CreationDate)
             {
                 Cells = document.Cells
             };

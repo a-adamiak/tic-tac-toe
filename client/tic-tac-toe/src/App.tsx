@@ -13,6 +13,7 @@ function App() {
           <Routes>
               <Route path='/' element={<Navigate replace to='/games' />} />
               <Route path='/games/*' element={<GamesManager />} />
+              <Route path='*' element={<Navigate replace to='/games' />} />
           </Routes>
         </Layout>
     </div>
