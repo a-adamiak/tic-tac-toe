@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import { IApiError } from '../models'
+import {notifyOnError} from "../helpers";
 
 export interface IRequestConfig {
   url: string
@@ -24,6 +25,12 @@ export function useHttp<T>(): [
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<IApiError | null>(null)
   const [data, setData] = useState<T | null>(null)
+
+  useEffect(() => {
+    if(error){
+      notifyOnError(error);
+    }
+  }, [error]);
 
   const sendRequest = async (overwriteConfig: IRequestConfig) => {
     setIsLoading(true)

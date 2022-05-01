@@ -65,16 +65,6 @@ export const useGameManager = (): gameManagerResponse => {
     }
   }, [deletedGameId])
 
-  useEffect(() => {
-    if (getError) notifyOnError(getError)
-  }, [getError])
-  useEffect(() => {
-    if (postError) notifyOnError(postError)
-  }, [postError])
-  useEffect(() => {
-    if (deleteError) notifyOnError(deleteError)
-  }, [deleteError])
-
   const updateGameState = useCallback(
     (gameId: string, status: GameStatus) =>
       dispatchGamesAction({

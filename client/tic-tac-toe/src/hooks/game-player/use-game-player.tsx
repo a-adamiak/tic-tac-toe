@@ -5,7 +5,7 @@ import { GameStatus, Tag } from '../../enums'
 import { useHttp } from '../use-http'
 import { GameAction, GameActionKind } from './actions'
 import { gameReducer } from './reducer'
-import { notifyOnError, notifyOnStatusChanged } from '../../helpers'
+import { notifyOnStatusChanged } from '../../helpers'
 import { useNavigate } from 'react-router-dom'
 
 const emptyBoard: (Tag | null)[][] = [
@@ -49,11 +49,6 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   }, [gameResponse])
 
   useEffect(() => {
-    if (getError)
-      getError.status === 404 ? navigate('../') : notifyOnError(getError)
-  }, [getError])
-
-  useEffect(() => {
     dispatchGameAction({ type: GameActionKind.SET, payload: tagResponse })
 
     notifyOnStatusChanged(tagResponse?.status!)
@@ -61,13 +56,17 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
 
   useEffect(() => {
     if (tagError) {
-      notifyOnError(tagError)
       getGameRequest({
         method: 'POST',
         url: apiUrl
       })
     }
   }, [tagError, gameId])
+
+  useEffect(() => {
+    if (getError?.status === 404)
+      navigate('../')
+  }, [getError])
 
   const canPlay: boolean = useMemo(
     () =>
