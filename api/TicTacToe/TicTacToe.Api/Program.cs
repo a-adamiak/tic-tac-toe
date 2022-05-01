@@ -28,6 +28,7 @@ app.UseCors(x => x
     .AllowAnyHeader()
 );
 
+app.UseHttpsRedirection();
 app.UseVersionedSwagger();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
