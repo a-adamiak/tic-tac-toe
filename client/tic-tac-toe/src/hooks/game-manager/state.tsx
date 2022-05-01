@@ -1,6 +1,6 @@
-import {IGameMetadata} from "../../models";
+import { IGameMetadata } from '../../models'
 
 export const reducerInitialState = {
-    games: [] as IGameMetadata[]
+  games: [] as IGameMetadata[],
 }
-export type GamesState = typeof reducerInitialState;
+export type GamesState = typeof reducerInitialState

@@ -1,4 +1,4 @@
 export enum Tag {
-    X = 'X',
-    O = 'O'
+  X = 'X',
+  O = 'O',
 }

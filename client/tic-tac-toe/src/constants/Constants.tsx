@@ -1,3 +1,3 @@
-import {Tag} from "../enums";
+import { Tag } from '../enums'
 
-export const ClientTag: Tag = Tag.X;
+export const ClientTag: Tag = Tag.X

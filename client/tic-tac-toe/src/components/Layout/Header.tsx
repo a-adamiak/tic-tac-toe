@@ -1,16 +1,16 @@
-import React, {FC} from 'react';
-import styles from './Header.module.scss';
+import React, { FC } from 'react'
+import styles from './Header.module.scss'
 
 interface HeaderProps {
-    title: string;
+  title: string
 }
 
-const Header: FC<HeaderProps> = ({title}) => {
-    return (
-        <div className={styles.header}>
-            <h2 >{title}</h2>
-        </div>
-    )
+const Header: FC<HeaderProps> = ({ title }) => {
+  return (
+    <div className={styles.header}>
+      <h2>{title}</h2>
+    </div>
+  )
 }
 
-export default Header;
+export default Header

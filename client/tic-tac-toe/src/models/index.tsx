@@ -1,3 +1,3 @@
-export * from './IGame';
-export * from './IApiError';
-export * from './IGameMetadata';
+export * from './IGame'
+export * from './IApiError'
+export * from './IGameMetadata'

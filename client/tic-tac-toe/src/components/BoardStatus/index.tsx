@@ -1,1 +1,1 @@
-export {default} from './BoardStatus';
+export { default } from './BoardStatus'

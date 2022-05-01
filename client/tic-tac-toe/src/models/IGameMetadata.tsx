@@ -1,3 +1,3 @@
-import {IGame} from "./IGame";
+import { IGame } from './IGame'
 
-export type IGameMetadata = Pick<IGame, 'id' | 'status'>;
+export type IGameMetadata = Pick<IGame, 'id' | 'status'>

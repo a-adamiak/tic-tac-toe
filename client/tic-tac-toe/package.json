@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"{,!(node_modules)/**/}*.js\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\"",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@imaginary-cloud/eslint-config-react": "2.0.1",
+    "@imaginary-cloud/prettier-config": "^1.0.0",
     "@types/styled-components": "^5.1.25",
     "css-loader": "^6.7.1",
     "eslint": "^8.14.0",

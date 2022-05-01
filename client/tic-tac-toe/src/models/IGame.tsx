@@ -1,8 +1,8 @@
-import {GameStatus, Tag} from "../enums";
+import { GameStatus, Tag } from '../enums'
 
 export interface IGame {
-    id: string;
-    cells: (Tag | null)[][];
-    status: GameStatus;
-    clientTag: Tag;
+  id: string
+  cells: (Tag | null)[][]
+  status: GameStatus
+  clientTag: Tag
 }

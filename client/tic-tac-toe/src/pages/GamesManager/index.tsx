@@ -1,1 +1,1 @@
-export {default} from './GamesManager';
+export { default } from './GamesManager'

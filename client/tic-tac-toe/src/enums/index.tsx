@@ -1,11 +1,2 @@
-export * from './Tag';
-export * from './GameStatus';
-
-
-
-
-
-
-
-
-
+export * from './Tag'
+export * from './GameStatus'
