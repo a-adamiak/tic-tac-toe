@@ -25,17 +25,17 @@ export const useGameManager = (): gameManagerResponse => {
     Reducer<GamesState, GamesAction>
   >(gamesReducer, reducerInitialState)
   // to simplify I don't use the loading state
-  const [getIsLoading, getError, allGames, getAllRequest] = useHttp<IGame[]>({
-    method: 'GET',
-    url: apiUrl,
-  })
+  const [getIsLoading, getError, allGames, getAllRequest] = useHttp<IGame[]>()
   const [postIsLoading, postError, createdGameId, createRequest] =
-    useHttp<string>({ method: 'POST', url: apiUrl, body: ClientTag })
+    useHttp<string>();
   const [deleteIsLoading, deleteError, deletedGameId, deleteRequest] =
-    useHttp<string>({ method: 'DELETE', url: apiUrl })
+    useHttp<string>();
 
   useEffect(() => {
-    getAllRequest()
+    getAllRequest({
+      method: 'GET',
+      url: apiUrl,
+    })
   }, [])
 
   useEffect(() => {
@@ -84,9 +84,9 @@ export const useGameManager = (): gameManagerResponse => {
     [],
   )
 
-  const addGame = useCallback(() => createRequest(), [])
+  const addGame = useCallback(() => createRequest({ method: 'POST', url: apiUrl, body: ClientTag }), [])
   const deleteGame = useCallback(
-    (gameId: string) => deleteRequest({ url: apiUrl + '/' + gameId }),
+    (gameId: string) => deleteRequest({ method: 'DELETE', url: apiUrl + '/' + gameId }),
     [],
   )
 

@@ -2,18 +2,16 @@ import { useState } from 'react'
 import { IApiError } from '../models'
 
 export interface IRequestConfig {
-  url?: string
-  method?: string
+  url: string
+  method: string
   body?: unknown
 }
 
-export function useHttp<T>(
-  requestConfig: IRequestConfig,
-): [
+export function useHttp<T>(): [
   isLoading: boolean,
   error: IApiError | null,
   data: T | null,
-  sendRequest: (overwriteConfig?: IRequestConfig) => void,
+  sendRequest: (overwriteConfig: IRequestConfig) => void,
 ] {
   const genericError = 'UndefinedError'
 
@@ -27,19 +25,16 @@ export function useHttp<T>(
   const [error, setError] = useState<IApiError | null>(null)
   const [data, setData] = useState<T | null>(null)
 
-  const sendRequest = async (overwriteConfig?: IRequestConfig) => {
+  const sendRequest = async (overwriteConfig: IRequestConfig) => {
     setIsLoading(true)
     setError(null)
 
     try {
       const response = await fetch(
-        overwriteConfig?.url ?? requestConfig.url ?? '',
+        overwriteConfig.url,
         {
-          method: requestConfig.method,
-          body:
-            overwriteConfig?.body ?? requestConfig.body
-              ? JSON.stringify(requestConfig.body)
-              : null,
+          method: overwriteConfig.method,
+          body: overwriteConfig?.body ? JSON.stringify(overwriteConfig.body) : null,
           headers: new Headers({
             Accept: 'application/json',
             'Content-Type': 'application/json',

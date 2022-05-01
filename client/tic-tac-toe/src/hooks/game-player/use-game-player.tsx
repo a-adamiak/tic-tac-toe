@@ -37,15 +37,11 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
     initialGame,
   )
 
-  const [tagIsLoading, tagError, tagResponse, tagCellRequest] = useHttp<IGame>({
-    method: 'POST',
-  })
-  const [getIsLoading, getError, gameResponse, getGameRequest] = useHttp<IGame>(
-    { method: 'GET', url: apiUrl },
-  )
+  const [tagIsLoading, tagError, tagResponse, tagCellRequest] = useHttp<IGame>();
+  const [getIsLoading, getError, gameResponse, getGameRequest] = useHttp<IGame>();
 
   useEffect(() => {
-    getGameRequest()
+    getGameRequest({ method: 'GET', url: apiUrl })
   }, [gameId])
 
   useEffect(() => {
@@ -66,7 +62,10 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   useEffect(() => {
     if (tagError) {
       notifyOnError(tagError)
-      getGameRequest()
+      getGameRequest({
+        method: 'POST',
+        url: apiUrl
+      })
     }
   }, [tagError, gameId])
 
@@ -85,7 +84,7 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
         type: GameActionKind.MARK_CELL,
         payload: { row, column },
       })
-      tagCellRequest({ url: apiUrl + `/cells/${row}/${column}` })
+      tagCellRequest({ url: apiUrl + `/cells/${row}/${column}`, method: 'POST' })
     },
     [apiUrl],
   )
