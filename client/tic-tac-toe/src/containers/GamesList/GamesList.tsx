@@ -1,11 +1,10 @@
-import {NavLink} from "react-router-dom";
 import React, {useCallback, useContext} from "react";
 import styles from './GameList.module.scss';
-import GamesContext from "../../../contexts/games/games-context";
-import AddButton from "../AddButton";
-import {IGameMetadata} from "../../../hooks";
-import DeleteButton from "../DeleteButton";
-import GamesListItem from "../GamesListItem";
+import GamesContext from "../../contexts/games/games-context";
+import GamesListItem from "../../components/GamesManager/GamesListItem";
+import AddButton from "../../components/GamesManager/AddButton";
+import {IGameMetadata} from "../../models";
+
 
 const GamesList = () => {
     const gamesState = useContext(GamesContext);
@@ -22,22 +21,20 @@ const GamesList = () => {
         <>
             <div className={styles.header}>
                 <span>List of games</span>
-                <AddButton onClick={createGame}></AddButton>
+                <AddButton onClick={createGame}/>
             </div>
 
                 <ul className={styles.list}>
                     {[...gamesState.games].reverse().map((game: IGameMetadata) => (
                         <GamesListItem
                             key={game.id}
-                            deleteGame={deleteGame}
                             id={game.id}
                             status={game.status}
+                            deleteGame={deleteGame}
                         />
                     ))}
                 </ul>
         </>
-
-
     )
 }
 

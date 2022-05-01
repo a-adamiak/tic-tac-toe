@@ -1,10 +1,10 @@
 import {Route, Routes} from "react-router-dom";
 import React from "react";
 import Home from "../../components/GamesManager/Home";
-import GamesList from "../../components/GamesManager/GamesList";
-import Game from '../Game/Game';
 import styles from './GamesManager.module.scss';
 import {GamesContextProvider} from "../../contexts";
+import GamesList from "../../containers/GamesList";
+import Game from "../../containers/Game";
 
 const GamesManager = () => {
     return (

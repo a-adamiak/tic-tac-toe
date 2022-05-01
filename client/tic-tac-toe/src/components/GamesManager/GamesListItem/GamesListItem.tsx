@@ -1,10 +1,10 @@
 import {NavLink} from "react-router-dom";
 import React, {FC, useCallback} from "react";
 import styles from './GameListItem.module.scss';
-import {IGameMetadata} from "../../../hooks";
 import DeleteButton from "../DeleteButton";
+import {IGameMetadata} from "../../../models";
 
-export interface IGameListItemProps extends IGameMetadata{
+export interface IGameListItemProps extends IGameMetadata {
     deleteGame: (gameId: string) => void
 }
 
@@ -24,8 +24,6 @@ const GamesListItem: FC<IGameListItemProps> = ({id, status, deleteGame}) => {
             </NavLink>
             <DeleteButton onClick={onDeleteGame}></DeleteButton>
         </li>
-
-
     )
 }
 

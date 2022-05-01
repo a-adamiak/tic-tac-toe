@@ -89,7 +89,7 @@ namespace TicTacToe.Api.Controllers
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <returns></returns>
-        [HttpPost("{id}/cells")]
+        [HttpPost("{id}/cells/{row}/{column}")]
         [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorDto), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ErrorDto), StatusCodes.Status500InternalServerError)]
