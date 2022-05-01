@@ -17,9 +17,16 @@ builder.Services.AddControllers()
     });
 builder.Services.AddVersioning();
 builder.Services.AddVersionedSwagger();
+builder.Services.AddCors();
 var app = builder.Build();
 
 app.UseExceptionMiddleware();
+
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+);
 
 app.UseVersionedSwagger();
 app.UseRouting();
@@ -29,9 +36,5 @@ app.UseEndpoints(endpoints =>
 });
 
 
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
 
 app.Run();

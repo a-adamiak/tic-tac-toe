@@ -1,0 +1,12 @@
+@import "/src/assets/styles/colors";
+
+$header-height: 3rem;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $secondary;
+  height: $header-height;
+  color: $secondary-text;
+}
