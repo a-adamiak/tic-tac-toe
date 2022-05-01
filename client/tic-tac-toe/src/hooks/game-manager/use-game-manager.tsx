@@ -7,7 +7,7 @@ import {GamesAction, GamesActionKind} from "./actions";
 import {GamesState, reducerInitialState} from "./state";
 import {gamesReducer} from "./reducer";
 import {notifyOnError} from "../../helpers";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 export type gameManagerResponse = [
     games: IGameMetadata[],
@@ -21,6 +21,7 @@ export const useGameManager = () : gameManagerResponse => {
     const apiUrl: string = `${process.env.REACT_APP_API_URL}/api/v1/games`;
 
     const navigate = useNavigate();
+    const location = useLocation();
     const [gamesState, dispatchGamesAction] = useReducer<Reducer<GamesState, GamesAction>>(gamesReducer, reducerInitialState);
     // to simplify I don't use the loading state
     const [getIsLoading, getError, allGames, getAllRequest] = useHttp<IGame[]>({method: 'GET', url: apiUrl})
@@ -46,6 +47,9 @@ export const useGameManager = () : gameManagerResponse => {
     useEffect(() => {
         if(deletedGameId){
             dispatchGamesAction({type: GamesActionKind.DELETE_GAME, payload: {gameId: deletedGameId}});
+            if(location.pathname.includes(deletedGameId)){
+                navigate('/games');
+            }
         }
 
     }, [deletedGameId])
