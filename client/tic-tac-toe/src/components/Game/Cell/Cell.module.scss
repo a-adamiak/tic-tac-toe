@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--background);
+  cursor: no-drop;
 
   &--active {
     cursor: pointer;
@@ -12,5 +13,9 @@
 
   &__icon {
     font-size: 2rem;
+  }
+
+  &:hover {
+    background-color: var(--dark-background);
   }
 }

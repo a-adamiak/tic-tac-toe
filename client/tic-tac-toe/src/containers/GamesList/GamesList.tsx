@@ -19,7 +19,7 @@ const GamesList = () => {
   return (
     <>
       <div className={styles.header}>
-        <span>List of games</span>
+        <span>Games</span>
         <AddButton onClick={createGame} />
       </div>
 

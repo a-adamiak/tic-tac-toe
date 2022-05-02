@@ -14,8 +14,12 @@ $item-padding: 0.2rem;
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 5px;
   padding: $item-padding;
-
   display: block;
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   background-color: var(--primary-light);
   color: var(--primary);
   text-decoration: none;
