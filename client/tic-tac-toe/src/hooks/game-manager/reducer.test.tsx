@@ -1,33 +1,14 @@
-import {build, oneOf} from "@jackfranklin/test-data-bot";
+import {build} from "@jackfranklin/test-data-bot";
 import {GamesState} from "./state";
-import {IGameMetadata} from "../../models";
-import {GameStatus} from "../../enums";
 import {GamesActionKind} from "./actions";
 import {gamesReducer} from "./reducer";
-import {randomText} from "../../helpers";
+import {gameMetadataBuilder, statusBuilder} from "../../tests/builder";
 
-const statusBuilder = build<{status: GameStatus}>({
-    fields: {
-        status: oneOf<GameStatus>(
-            GameStatus.InProgress,
-            GameStatus.Loading,
-            GameStatus.ClientWon,
-            GameStatus.BotWon,
-            GameStatus.Draw,
-            GameStatus.Failed)
-    }
-})
 
-const gamesBuilder = build<IGameMetadata>({
-    fields: {
-        id: randomText(),
-        status: statusBuilder().status
-    },
-})
 
 const stateBuilder = build<GamesState>({
     fields: {
-        games: [0].map( _ => gamesBuilder())
+        games: [0].map( _ => gameMetadataBuilder())
     }
 })
 
@@ -36,7 +17,7 @@ describe('Game manager reducer', () => {
         // Arrange
 
         const initialState = stateBuilder();
-        const newGames = [0,1,2,3].map( _ => gamesBuilder())
+        const newGames = [0,1,2,3].map( _ => gameMetadataBuilder())
 
         // Act
 

@@ -1,22 +1,16 @@
 import {render, screen} from "@testing-library/react";
-import {build, oneOf,} from '@jackfranklin/test-data-bot'
+import {build } from '@jackfranklin/test-data-bot'
 import userEvent from "@testing-library/user-event";
 import GamesListItem, {IGameListItemProps} from "./GamesListItem";
-import {GameStatus, Tag} from "../../../enums";
 import {BrowserRouter} from "react-router-dom";
 import {randomText} from "../../../helpers";
+import {statusBuilder} from "../../../tests/builder";
 
 const gameLisItemPropsBuilder = build<IGameListItemProps>({
     fields: {
         deleteGame: gameId => {},
         id: randomText(),
-        status: oneOf<GameStatus>(
-            GameStatus.InProgress,
-            GameStatus.Loading,
-            GameStatus.ClientWon,
-            GameStatus.BotWon,
-            GameStatus.Draw,
-            GameStatus.Failed)
+        status: statusBuilder().status
     }
 })
 

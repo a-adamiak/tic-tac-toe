@@ -22,6 +22,7 @@ export const useGameManager = (): gameManagerResponse => {
   const location = useLocation()
   const [gamesState, dispatchGamesAction] = useReducer<Reducer<GamesState, GamesAction>>(gamesReducer, reducerInitialState)
 
+  // each hook could be a custom hook
   const [getIsLoading, getError, allGames, getAllRequest] = useHttp<IGame[]>()
   const [postIsLoading, postError, createdGameId, createRequest] = useHttp<string>();
   const [deleteIsLoading, deleteError, deletedGameId, deleteRequest] = useHttp<string>();
@@ -65,9 +66,11 @@ export const useGameManager = (): gameManagerResponse => {
         type: GamesActionKind.UPDATE_STATUS,
         payload: { gameId, status },
       }), [],)
-  const addGame = useCallback(() => createRequest({ method: 'POST', url: apiUrl, body: ClientTag }), [])
+  const addGame = useCallback(() => createRequest({method: 'POST', url: apiUrl, body: ClientTag}), [])
   const deleteGame = useCallback(
-    (gameId: string) => deleteRequest({ method: 'DELETE', url: apiUrl + '/' + gameId }),
+    (gameId: string) => {
+      deleteRequest({method: 'DELETE', url: apiUrl + '/' + gameId});
+    },
     [],
   )
 

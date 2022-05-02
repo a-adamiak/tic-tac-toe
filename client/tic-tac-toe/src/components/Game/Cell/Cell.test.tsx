@@ -1,16 +1,16 @@
 import {render} from "@testing-library/react";
-import {build, oneOf,} from '@jackfranklin/test-data-bot'
+import {build } from '@jackfranklin/test-data-bot'
 import Cell from "../Cell";
 import {ICellProps} from "../Cell/Cell";
-import {Tag} from "../../enums";
 import userEvent from "@testing-library/user-event";
+import {tagBuilder} from "../../../tests/builder";
 
 const canPlayCellBuilder = build<ICellProps>({
     fields: {
         canPlay: true,
         cellTagged: tag => {},
         tag: null,
-        clientTag: oneOf<Tag>(Tag.X, Tag.O)
+        clientTag: tagBuilder().tag
     }
 })
 
@@ -19,7 +19,7 @@ const canNotPlayCellBuilder = build<ICellProps>({
         canPlay: false,
         cellTagged: tag => {},
         tag: null,
-        clientTag: oneOf<Tag>(Tag.X, Tag.O)
+        clientTag: tagBuilder().tag
     }
 })
 
@@ -27,8 +27,8 @@ const alreadyTaggedCellBuilder = build<ICellProps>({
     fields: {
         canPlay: false,
         cellTagged: tag => {},
-        tag: oneOf<Tag>(Tag.X, Tag.O),
-        clientTag: oneOf<Tag>(Tag.X, Tag.O)
+        tag: tagBuilder().tag,
+        clientTag: tagBuilder().tag
     }
 })
 

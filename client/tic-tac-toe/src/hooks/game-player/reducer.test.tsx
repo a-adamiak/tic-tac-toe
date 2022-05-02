@@ -1,37 +1,6 @@
-import {build, oneOf} from "@jackfranklin/test-data-bot";
-import {IGame} from "../../models";
-import {GameStatus, Tag} from "../../enums";
 import {GameActionKind} from "./actions";
 import {gameReducer} from "./reducer";
-import {randomText} from "../../helpers";
-
-const statusBuilder = build<{status: GameStatus}>({
-    fields: {
-        status: oneOf<GameStatus>(
-            GameStatus.InProgress,
-            GameStatus.Loading,
-            GameStatus.ClientWon,
-            GameStatus.BotWon,
-            GameStatus.Draw,
-            GameStatus.Failed)
-    }
-})
-
-const tagBuilder = build<{tag: Tag}>({
-    fields: {
-        tag: oneOf<Tag>(Tag.O, Tag.X)
-    }
-})
-
-const gameBuilder = build<IGame>({
-    fields: {
-        id: randomText(),
-        status: statusBuilder().status,
-        cells: [[null, null, null]],
-        clientTag: tagBuilder().tag
-    },
-})
-
+import {gameBuilder} from "../../tests/builder";
 
 
 describe('Game player reducer', () => {
@@ -65,3 +34,4 @@ describe('Game player reducer', () => {
         expect(result.cells[0][0]).toEqual(initialState.clientTag);
     })
 });
+

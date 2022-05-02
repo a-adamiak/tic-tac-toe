@@ -1,5 +1,5 @@
 import styles from './Cell.module.scss'
-import { Tag } from '../../enums'
+import { Tag } from '../../../enums'
 import { FC, useCallback, useEffect, useState } from 'react'
 
 export interface ICellProps {

@@ -1,13 +1,13 @@
 import {render} from "@testing-library/react";
-import {build, oneOf,} from '@jackfranklin/test-data-bot'
-import {Tag} from "../../enums";
+import {build} from '@jackfranklin/test-data-bot'
 import Board, {IBoardProps} from "./Board";
 import userEvent from "@testing-library/user-event";
+import {tagBuilder} from "../../../tests/builder";
 
 const boardCanPlayPropsBuilder = build<IBoardProps>({
     fields: {
         canPlay: true,
-        clientTag: oneOf<Tag>(Tag.X, Tag.O),
+        clientTag: tagBuilder().tag,
         tagCell: (row, column) => {},
         cells: [[null, null, null], [null, null, null], [null, null, null]]
     }
@@ -16,7 +16,7 @@ const boardCanPlayPropsBuilder = build<IBoardProps>({
 const boardCanNotPlayPropsBuilder = build<IBoardProps>({
     fields: {
         canPlay: false,
-        clientTag: oneOf<Tag>(Tag.X, Tag.O),
+        clientTag: tagBuilder().tag,
         tagCell: (row, column) => {},
         cells: [[null, null, null], [null, null, null], [null, null, null]]
     }

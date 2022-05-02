@@ -1,17 +1,11 @@
 import {render, screen} from "@testing-library/react";
-import {build, oneOf,} from '@jackfranklin/test-data-bot'
-import {GameStatus} from "../../enums";
+import {build } from '@jackfranklin/test-data-bot'
 import BoardStatus, {IBoardStatusProps} from "../BoardStatus/BoardStatus";
+import {statusBuilder} from "../../../tests/builder";
 
 const boardStatusPropsBuilder = build<IBoardStatusProps>({
     fields: {
-        status: oneOf<GameStatus>(
-            GameStatus.InProgress,
-            GameStatus.Loading,
-            GameStatus.ClientWon,
-            GameStatus.BotWon,
-            GameStatus.Draw,
-            GameStatus.Failed)
+        status: statusBuilder().status
     }
 })
 
