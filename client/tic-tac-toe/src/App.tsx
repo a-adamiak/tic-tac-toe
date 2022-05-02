@@ -11,9 +11,7 @@ function App() {
     <div className="App">
       <Layout>
         <Routes>
-          <Route path="/" element={<Navigate replace to="/games" />} />
-          <Route path="/games/*" element={<GamesManager />} />
-          <Route path="*" element={<Navigate replace to="/games" />} />
+          <Route path="*" element={<GamesManager />} />
         </Routes>
       </Layout>
     </div>

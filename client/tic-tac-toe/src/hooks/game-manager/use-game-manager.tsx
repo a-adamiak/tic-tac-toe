@@ -55,7 +55,7 @@ export const useGameManager = (): gameManagerResponse => {
         payload: { gameId: deletedGameId },
       })
       if (location.pathname.includes(deletedGameId)) {
-        navigate('/games')
+        navigate('/')
       }
     }
   }, [deletedGameId])
