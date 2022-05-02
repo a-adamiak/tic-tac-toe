@@ -42,5 +42,5 @@
     "sass-loader": "^12.6.0",
     "webpack": "^5.72.0"
   },
-  "homepage": "https://a-adamiak.github.io/tic-tac-toe/pages"
+  "homepage": "https://a-adamiak.github.io/tic-tac-toe"
 }
