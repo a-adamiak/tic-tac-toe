@@ -9,13 +9,11 @@ export const contextInitialState = {
   addGame: () => {},
   deleteGame: (gameId: string) => {},
 }
-
 export type GamesContextState = typeof contextInitialState
 
 interface GamesContextProps {
   children: ReactElement | ReactElement[]
 }
-
 const GamesContext = createContext<GamesContextState>(contextInitialState)
 
 export const GamesContextProvider: React.FC<GamesContextProps> = ({

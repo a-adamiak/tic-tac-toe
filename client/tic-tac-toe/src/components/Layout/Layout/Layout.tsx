@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react'
 import styles from './Layout.module.scss'
-import Header from './Header'
+import Header from '../Header/Header'
 
 interface LayoutProps {
   children: ReactElement | ReactElement[]

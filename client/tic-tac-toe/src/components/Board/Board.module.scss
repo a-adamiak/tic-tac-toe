@@ -4,11 +4,9 @@
   justify-content: space-between;
   height: calc(100% - 50px);
   width: calc(100% - 50px);
-
   border: 8px solid;
   padding: 1rem;
   border-image: linear-gradient(45deg, var(--accent), var(--secondary)) 1;
-
   background-color: var(--primary-dark);
 
   &__cell {

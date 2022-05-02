@@ -15,6 +15,7 @@ const Cell: FC<CellProps> = ({ tag, cellTagged, clientTag, canPlay }) => {
   useEffect(() => setState(tag), [tag])
 
   const clickable = !state && canPlay
+  const clickableClass = clickable ? styles['cell--active'] : ''
 
   const onClick = useCallback(() => {
     if (!clickable) {
@@ -23,8 +24,6 @@ const Cell: FC<CellProps> = ({ tag, cellTagged, clientTag, canPlay }) => {
     setState(clientTag)
     cellTagged(clientTag)
   }, [setState, state, clickable])
-
-  const clickableClass = clickable ? styles['cell--active'] : ''
 
   return (
     <div className={`${styles.cell} ${clickableClass}`} onClick={onClick}>

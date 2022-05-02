@@ -6,7 +6,6 @@ import { GameStatus } from '../../enums'
 import { GamesAction, GamesActionKind } from './actions'
 import { GamesState, reducerInitialState } from './state'
 import { gamesReducer } from './reducer'
-import { notifyOnError } from '../../helpers'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 export type gameManagerResponse = [
@@ -21,15 +20,11 @@ export const useGameManager = (): gameManagerResponse => {
 
   const navigate = useNavigate()
   const location = useLocation()
-  const [gamesState, dispatchGamesAction] = useReducer<
-    Reducer<GamesState, GamesAction>
-  >(gamesReducer, reducerInitialState)
-  // to simplify I don't use the loading state
+  const [gamesState, dispatchGamesAction] = useReducer<Reducer<GamesState, GamesAction>>(gamesReducer, reducerInitialState)
+
   const [getIsLoading, getError, allGames, getAllRequest] = useHttp<IGame[]>()
-  const [postIsLoading, postError, createdGameId, createRequest] =
-    useHttp<string>();
-  const [deleteIsLoading, deleteError, deletedGameId, deleteRequest] =
-    useHttp<string>();
+  const [postIsLoading, postError, createdGameId, createRequest] = useHttp<string>();
+  const [deleteIsLoading, deleteError, deletedGameId, deleteRequest] = useHttp<string>();
 
   useEffect(() => {
     getAllRequest({
@@ -65,15 +60,11 @@ export const useGameManager = (): gameManagerResponse => {
     }
   }, [deletedGameId])
 
-  const updateGameState = useCallback(
-    (gameId: string, status: GameStatus) =>
+  const updateGameState = useCallback((gameId: string, status: GameStatus) =>
       dispatchGamesAction({
         type: GamesActionKind.UPDATE_STATUS,
         payload: { gameId, status },
-      }),
-    [],
-  )
-
+      }), [],)
   const addGame = useCallback(() => createRequest({ method: 'POST', url: apiUrl, body: ClientTag }), [])
   const deleteGame = useCallback(
     (gameId: string) => deleteRequest({ method: 'DELETE', url: apiUrl + '/' + gameId }),

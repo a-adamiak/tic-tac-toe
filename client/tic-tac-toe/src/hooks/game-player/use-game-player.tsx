@@ -14,6 +14,13 @@ const emptyBoard: (Tag | null)[][] = [
   [null, null, null],
 ]
 
+const getInitialState = (gameId: string): IGame => ({
+  status: GameStatus.Loading,
+  id: gameId,
+  cells: emptyBoard,
+  clientTag: ClientTag,
+});
+
 export type gamePlayerResponse = [
   canPlay: boolean,
   game: IGame,
@@ -22,16 +29,9 @@ export type gamePlayerResponse = [
 
 export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   const apiUrl: string = `${process.env.REACT_APP_API_URL}/api/v1/games/${gameId}`
+  const initialGame = getInitialState(gameId);
 
   const navigate = useNavigate()
-
-  const initialGame = {
-    status: GameStatus.Loading,
-    id: gameId,
-    cells: emptyBoard,
-    clientTag: ClientTag,
-  }
-
   const [game, dispatchGameAction] = useReducer<Reducer<IGame, GameAction>>(
     gameReducer,
     initialGame,

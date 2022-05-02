@@ -19,7 +19,9 @@ const Board: FC<IBoardProps> = ({ cells, clientTag, canPlay, tagCell }) => {
     <div className={styles.board}>
       {cells.map((row, rowIndex) =>
         row.map((cell, columnIndex) => (
-          <div key={`${rowIndex}${columnIndex}`} className={styles.board__cell}>
+          <div
+              key={`${rowIndex}${columnIndex}`}
+              className={styles.board__cell}>
             <Cell
               canPlay={canPlayState}
               clientTag={clientTag}
