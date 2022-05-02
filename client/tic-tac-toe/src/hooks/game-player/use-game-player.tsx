@@ -2,7 +2,7 @@ import { Reducer, useCallback, useEffect, useMemo, useReducer } from 'react'
 import { IGame } from '../../models'
 import { ClientTag } from '../../constants'
 import { GameStatus, Tag } from '../../enums'
-import { useHttp } from '../use-http'
+import { useHttp }  from '../use-http'
 import { GameAction, GameActionKind } from './actions'
 import { gameReducer } from './reducer'
 import { notifyOnStatusChanged } from '../../helpers'
@@ -80,7 +80,7 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   const tagCell = useCallback(
     (row: number, column: number) => {
       dispatchGameAction({
-        type: GameActionKind.MARK_CELL,
+        type: GameActionKind.TAG_CELL,
         payload: { row, column },
       })
       tagCellRequest({ url: apiUrl + `/cells/${row}/${column}`, method: 'POST' })

@@ -1,8 +1,8 @@
-import Board from '../../components/Board'
+import Board from '../../components/Game/Board'
 import { useGamePlayer } from '../../hooks'
 import { useParams } from 'react-router-dom'
 import styles from './Game.module.scss'
-import BoardStatus from '../../components/BoardStatus'
+import BoardStatus from '../../components/Game/BoardStatus'
 
 const Game = () => {
   const params = useParams()

@@ -9,7 +9,7 @@ export const gamesReducer = (state: GamesState, action: GamesAction) => {
       return { games: action.payload }
     case GamesActionKind.UPDATE_STATUS:
       return {
-        games: state.games.map((game: Partial<IGameMetadata>) =>
+        games: state.games.map((game: IGameMetadata) =>
           game.id === action.payload.id
             ? { ...game, status: action.payload.status }
             : game,

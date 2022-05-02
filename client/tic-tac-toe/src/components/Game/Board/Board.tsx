@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import styles from './Board.module.scss'
 import Cell from '../Cell'
-import { Tag } from '../../enums'
+import { Tag } from '../../../enums'
 
 export interface IBoardProps {
   canPlay: boolean
