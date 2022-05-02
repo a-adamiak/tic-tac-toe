@@ -34,7 +34,7 @@ const gameBuilder = build<IGame>({
 
 
 
-describe('Game manager reducer', () => {
+describe('Game player reducer', () => {
     test('when set should overwritte game', () => {
         // Arrange
 
@@ -54,15 +54,14 @@ describe('Game manager reducer', () => {
         // Arrange
 
         const initialState = gameBuilder();
-        const newTag = tagBuilder().tag;
 
         // Act
 
         const result = gameReducer(initialState, {type: GameActionKind.TAG_CELL,
-            payload: {row: 0, column: 0, newTag}});
+            payload: {row: 0, column: 0}});
 
         // Assert
 
-        expect(result.cells[0][0]).toEqual(newTag);
+        expect(result.cells[0][0]).toEqual(initialState.clientTag);
     })
 });
