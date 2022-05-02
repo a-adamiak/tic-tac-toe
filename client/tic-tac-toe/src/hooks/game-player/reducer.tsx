@@ -6,7 +6,7 @@ export const gameReducer = (state: IGame, action: GameAction) => {
   switch (action.type) {
     case GameActionKind.SET:
       return action.payload
-    case GameActionKind.MARK_CELL:
+    case GameActionKind.TAG_CELL:
       return {
         ...state,
         cells: state.cells.map((arr: (Tag | null)[], row: number) =>

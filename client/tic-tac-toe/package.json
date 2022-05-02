@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@jackfranklin/test-data-bot": "^2.0.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
+    "@testing-library/react-hooks": "^8.0.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.32",
@@ -42,5 +44,5 @@
     "sass-loader": "^12.6.0",
     "webpack": "^5.72.0"
   },
-  "homepage": "https://a-adamiak.github.io/tic-tac-toe" 
+  "homepage": "https://a-adamiak.github.io/tic-tac-toe"
 }

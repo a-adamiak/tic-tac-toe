@@ -1,6 +1,6 @@
 export enum GameActionKind {
   SET = 'SET',
-  MARK_CELL = 'MARK_CELL',
+  TAG_CELL = 'TAG_CELL',
 }
 
 export interface GameAction {

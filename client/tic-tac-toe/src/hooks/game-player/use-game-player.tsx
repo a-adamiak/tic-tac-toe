@@ -80,7 +80,7 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   const tagCell = useCallback(
     (row: number, column: number) => {
       dispatchGameAction({
-        type: GameActionKind.MARK_CELL,
+        type: GameActionKind.TAG_CELL,
         payload: { row, column },
       })
       tagCellRequest({ url: apiUrl + `/cells/${row}/${column}`, method: 'POST' })
