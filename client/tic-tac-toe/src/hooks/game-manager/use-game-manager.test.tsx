@@ -3,6 +3,7 @@ import {useGameManager} from "./use-game-manager";
 import {gameBuilder} from "../../tests/builder";
 import {BrowserRouter} from "react-router-dom";
 import {mockResponse} from "../../setupTests";
+import {ReactElement} from "react";
 
 
 describe('Game manager hook', () => {
@@ -22,38 +23,12 @@ describe('Game manager hook', () => {
 
         expect(games).toEqual(gamesResult);
     });
-
-    test('adds game', () => {
-        // Arrange
-
-        const initialGames = [0,1].map(() => gameBuilder());
-        mockResponse.mockReturnValue(initialGames);
-
-        const { result } = renderHook(() => useGameManager(), {wrapper});
-
-        const [_, __, addGame] = result.current;
-
-        mockResponse.mockReturnValue(gameBuilder());
-
-        // Act
-
-        act(() => {
-            addGame();
-        })
-
-
-        // Assert
-
-        const [updatedGames] = result.current;
-
-        expect(updatedGames.length).toEqual(initialGames.length + 1);
-    });
 });
 
-const wrapper = ({children}) => (
+const wrapper = (props: {children: ReactElement | ReactElement[]} ) => (
     <>
         <BrowserRouter>
-            {children}
+            {props.children}
         </BrowserRouter>
     </>);
 

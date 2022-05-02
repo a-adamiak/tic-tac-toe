@@ -5,6 +5,7 @@ import {BrowserRouter} from "react-router-dom";
 import {randomText} from "../../helpers";
 import {mockError, mockResponse, mockIsLoadingCell} from "../../setupTests";
 import {GameStatus} from "../../enums";
+import {ReactElement} from "react";
 
 
 describe('Game player hook', () => {
@@ -122,10 +123,10 @@ describe('Game player hook', () => {
     });
 });
 
-const wrapper = ({children}) => (
+const wrapper = (props: {children: ReactElement | ReactElement[]} ) => (
     <>
         <BrowserRouter>
-            {children}
+            {props.children}
         </BrowserRouter>
     </>);
 
