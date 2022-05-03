@@ -53,6 +53,7 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
     dispatchGameAction({ type: GameActionKind.SET, payload: tagResponse })
   }, [tagResponse])
 
+  // could be a separate hook
   useEffect(() => {
     switch (tagResponse?.status){
       case GameStatus.BotWon:
