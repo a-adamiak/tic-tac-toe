@@ -1,11 +1,11 @@
-import { Reducer, useCallback, useEffect, useMemo, useReducer } from 'react'
-import {GameStatus, IGame, Tag} from '../../models'
-import { useHttp }  from '../use-http'
-import { GameAction, GameActionKind } from './actions'
-import { gameReducer } from './reducer'
-import { notifyOnStatusChanged } from '../../helpers'
-import { useNavigate } from 'react-router-dom'
+import {Reducer, useCallback, useContext, useEffect, useMemo, useReducer} from 'react'
+import {GameStatus, IGame, NotificationType, Tag} from '../../models'
+import {useHttp} from '../use-http'
+import {GameAction, GameActionKind} from './actions'
+import {gameReducer} from './reducer'
+import {useNavigate} from 'react-router-dom'
 import {ClientTag} from "../../contexts";
+import NotificationsContext from "../../contexts/notifications/notifications-context";
 
 const emptyBoard: (Tag | null)[][] = [
   [null, null, null],
@@ -31,6 +31,8 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   const initialGame = getInitialState(gameId);
 
   const navigate = useNavigate()
+  const notificationContext = useContext(NotificationsContext);
+
   const [game, dispatchGameAction] = useReducer<Reducer<IGame, GameAction>>(
     gameReducer,
     initialGame,
@@ -52,7 +54,20 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
   }, [tagResponse])
 
   useEffect(() => {
-    notifyOnStatusChanged(tagResponse?.status!)
+    switch (tagResponse?.status){
+      case GameStatus.BotWon:
+        notificationContext.setNotification(NotificationType.BotWon);
+        break;
+      case GameStatus.Draw:
+        notificationContext.setNotification(NotificationType.GameDraw);
+        break;
+      case GameStatus.Failed:
+        notificationContext.setNotification(NotificationType.GameFailed);
+        break;
+      case GameStatus.ClientWon:
+        notificationContext.setNotification(NotificationType.ClientWon);
+        break;
+    }
   }, [tagResponse])
 
   useEffect(() => {

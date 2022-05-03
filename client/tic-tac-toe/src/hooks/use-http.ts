@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { IApiError } from '../models'
-import {notifyOnError} from "../helpers";
+import NotificationsContext from "../contexts/notifications/notifications-context";
 
 export interface IRequestConfig {
   url: string
@@ -25,10 +25,11 @@ export function useHttp<T>(): [
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<IApiError | null>(null)
   const [data, setData] = useState<T | null>(null)
+  const notificationContext = useContext(NotificationsContext);
 
   useEffect(() => {
     if(error){
-      notifyOnError(error);
+      notificationContext.setError(error);
     }
   }, [error]);
 
