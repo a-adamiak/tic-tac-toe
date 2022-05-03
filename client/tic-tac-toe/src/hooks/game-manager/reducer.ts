@@ -1,7 +1,6 @@
 import { GamesState } from './state'
 import { GamesAction, GamesActionKind } from './actions'
-import { GameStatus } from '../../enums'
-import { IGameMetadata } from '../../models'
+import {GameStatus, IGameMetadata} from '../../models'
 
 export const gamesReducer = (state: GamesState, action: GamesAction) => {
   switch (action.type) {

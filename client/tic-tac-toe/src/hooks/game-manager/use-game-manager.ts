@@ -1,12 +1,11 @@
 import { Reducer, useCallback, useEffect, useReducer } from 'react'
-import { IGame, IGameMetadata } from '../../models'
+import {GameStatus, IGame, IGameMetadata} from '../../models'
 import { useHttp } from '../use-http'
-import { ClientTag } from '../../constants'
-import { GameStatus } from '../../enums'
 import { GamesAction, GamesActionKind } from './actions'
 import { GamesState, reducerInitialState } from './state'
 import { gamesReducer } from './reducer'
 import { useLocation, useNavigate } from 'react-router-dom'
+import {ClientTag} from "../../contexts";
 
 export type gameManagerResponse = [
   games: IGameMetadata[],

@@ -1,6 +1,5 @@
 import {build, oneOf, sequence} from "@jackfranklin/test-data-bot";
-import {GameStatus, Tag} from "../enums";
-import {IApiError, IGame, IGameMetadata} from "../models";
+import {GameStatus, IApiError, IGame, IGameMetadata, Tag} from "../models";
 import {randomText} from "../helpers";
 
 export const statusBuilder = build<{status: GameStatus}>({

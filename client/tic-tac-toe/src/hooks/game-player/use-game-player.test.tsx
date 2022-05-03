@@ -4,8 +4,8 @@ import {errorBuilder, gameBuilder} from "../../tests/builder";
 import {BrowserRouter} from "react-router-dom";
 import {randomText} from "../../helpers";
 import {mockError, mockResponse, mockIsLoadingCell} from "../../setupTests";
-import {GameStatus} from "../../enums";
 import {ReactElement} from "react";
+import {GameStatus} from "../../models";
 
 
 describe('Game player hook', () => {

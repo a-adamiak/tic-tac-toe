@@ -1,12 +1,11 @@
 import { Reducer, useCallback, useEffect, useMemo, useReducer } from 'react'
-import { IGame } from '../../models'
-import { ClientTag } from '../../constants'
-import { GameStatus, Tag } from '../../enums'
+import {GameStatus, IGame, Tag} from '../../models'
 import { useHttp }  from '../use-http'
 import { GameAction, GameActionKind } from './actions'
 import { gameReducer } from './reducer'
 import { notifyOnStatusChanged } from '../../helpers'
 import { useNavigate } from 'react-router-dom'
+import {ClientTag} from "../../contexts";
 
 const emptyBoard: (Tag | null)[][] = [
   [null, null, null],
@@ -50,7 +49,9 @@ export const useGamePlayer = (gameId: string): gamePlayerResponse => {
 
   useEffect(() => {
     dispatchGameAction({ type: GameActionKind.SET, payload: tagResponse })
+  }, [tagResponse])
 
+  useEffect(() => {
     notifyOnStatusChanged(tagResponse?.status!)
   }, [tagResponse])
 

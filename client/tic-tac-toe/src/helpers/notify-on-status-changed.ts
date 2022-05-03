@@ -1,5 +1,7 @@
-import { GameStatus } from '../enums'
+import {GameStatus} from "../models";
 
+
+// it could be a hook in complex scenario
 export const notifyOnStatusChanged = (status: GameStatus): void => {
   switch (status) {
     case GameStatus.Failed:

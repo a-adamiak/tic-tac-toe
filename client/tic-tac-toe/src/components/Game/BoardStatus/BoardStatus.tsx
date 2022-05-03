@@ -1,6 +1,6 @@
 import styles from './BoardStatus.module.scss'
-import { GameStatus } from '../../../enums'
 import { FC } from 'react'
+import {GameStatus} from "../../../models";
 
 export interface IBoardStatusProps {
   status: GameStatus

@@ -1,4 +1,5 @@
-import { GameStatus, Tag } from '../enums'
+import {Tag} from "./Tag";
+import {GameStatus} from "./GameStatus";
 
 export interface IGame {
   id: string

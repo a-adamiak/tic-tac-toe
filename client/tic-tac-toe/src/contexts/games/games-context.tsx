@@ -1,7 +1,6 @@
 import React, { createContext, ReactElement } from 'react'
-import { GameStatus } from '../../enums'
 import { useGameManager } from '../../hooks'
-import { IGameMetadata } from '../../models'
+import {GameStatus, IGameMetadata} from '../../models'
 
 export const contextInitialState = {
   games: [] as IGameMetadata[],

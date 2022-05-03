@@ -1,6 +1,6 @@
 import styles from './Cell.module.scss'
-import { Tag } from '../../../enums'
 import { FC, useCallback, useEffect, useState } from 'react'
+import {Tag} from "../../../models";
 
 export interface ICellProps {
   tag: Tag | null

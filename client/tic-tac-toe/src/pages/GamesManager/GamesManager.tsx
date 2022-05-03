@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 import Home from '../../components/GamesManager/Home'
 import styles from './GamesManager.module.scss'

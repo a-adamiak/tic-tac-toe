@@ -1,6 +1,5 @@
-import { IGame } from '../../models'
+import {IGame, Tag} from '../../models'
 import { GameAction, GameActionKind } from './actions'
-import { Tag } from '../../enums'
 
 export const gameReducer = (state: IGame, action: GameAction) => {
   switch (action.type) {
