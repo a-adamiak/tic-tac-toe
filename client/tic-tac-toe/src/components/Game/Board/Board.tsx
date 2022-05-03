@@ -3,6 +3,8 @@ import styles from './Board.module.scss'
 import Cell from '../Cell'
 import {Tag} from "../../../models";
 
+
+// in css in js I wouldn't use a separate directory for the component
 export interface IBoardProps {
   canPlay: boolean
   tagCell: (row: number, column: number, tag: Tag) => void
